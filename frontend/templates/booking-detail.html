@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:replace="~{fragments :: head('Booking')}"></head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="container">
+<div id="booking-root" th:data-id="${bookingId}" th:data-role="${#authorization.expression('hasRole(''ADMIN'')') ? 'ADMIN' : (#authorization.expression('hasRole(''EMPLOYEE'')') ? 'EMPLOYEE' : 'CUSTOMER')}">
+  <p><a th:href="@{/account}">&larr; All bookings</a></p>
+  <div id="success"></div>
+  <div id="booking-body"><div class="state"><div class="spinner"></div>Loading booking...</div></div>
+</div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+<script th:src="@{/js/booking-detail.js}" defer></script>
+</body>
+</html>

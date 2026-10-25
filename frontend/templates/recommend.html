@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:replace="~{fragments :: head('Recommendations')}"></head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="container">
+<h1 class="page-title">Find my car</h1>
+<p class="muted">Describe the trip. We rank only vehicles that are free for your dates and meet your seating, type and budget requirements. Nothing is reserved until you book.</p>
+<div class="layout-2">
+  <form id="rec-form" class="filters card" novalidate>
+    <div class="field"><label for="c-pick">Pickup date</label><input id="c-pick" type="date" name="pickupDate" required></div>
+    <div class="field"><label for="c-ret">Return date</label><input id="c-ret" type="date" name="returnDate" required></div>
+    <div class="field"><label for="c-seats">Seats needed</label><input id="c-seats" type="number" name="seats" min="1" max="12" value="4" required></div>
+    <div class="field"><label for="c-budget">Max budget per day (INR)</label><input id="c-budget" type="number" name="maxDailyBudget" min="0" placeholder="No limit"></div>
+    <div class="field"><label for="c-type">Vehicle type</label><select id="c-type" name="type"></select></div>
+    <div class="field"><label for="c-loc">Pickup location</label><select id="c-loc" name="locationId"></select></div>
+    <div class="field"><label><input type="checkbox" name="sameLocationOnly"> Only this location</label></div>
+    <div class="field"><label for="c-fuel">Preferred fuel</label><select id="c-fuel" name="preferredFuel"></select></div>
+    <div class="field"><label for="c-tr">Preferred transmission</label><select id="c-tr" name="preferredTransmission"></select></div>
+    <button class="btn btn-block" type="submit">Recommend</button>
+  </form>
+  <section id="rec-results"><div class="state">Fill in the form to see ranked matches.</div></section>
+</div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+<script th:src="@{/js/recommend.js}" defer></script>
+</body>
+</html>

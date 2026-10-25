@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:replace="~{fragments :: head('Premium car rental')}"></head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="container">
+<section class="hero">
+  <div>
+    <h1>Rent the right car, priced fairly.</h1>
+    <p class="lead">Live availability, transparent dynamic pricing and a recommendation engine that explains its choices.</p>
+    <form id="search-form" class="search-card" autocomplete="off">
+      <div class="field"><label for="s-loc">Pickup location</label><select id="s-loc" name="locationId"></select></div>
+      <div class="field"><label for="s-type">Vehicle type</label><select id="s-type" name="type"></select></div>
+      <div class="field"><label for="s-pick">Pickup date</label><input id="s-pick" type="date" name="pickupDate" required></div>
+      <div class="field"><label for="s-ret">Return date</label><input id="s-ret" type="date" name="returnDate" required></div>
+      <div class="field"><label for="s-seats">Min seats</label><input id="s-seats" type="number" name="minSeats" min="1" max="12" placeholder="Any"></div>
+      <button class="btn" type="submit">Search vehicles</button>
+    </form>
+  </div>
+  <img class="hero-car" th:src="@{/images/cars/sedan.svg}" alt="">
+</section>
+<section class="section">
+  <div class="stats">
+    <div class="kpi"><b id="stat-vehicles">-</b><span>vehicles in the fleet</span></div>
+    <div class="kpi"><b id="stat-locations">-</b><span>pickup locations</span></div>
+    <div class="kpi"><b id="stat-types">-</b><span>vehicle categories</span></div>
+  </div>
+</section>
+<section class="section">
+  <div class="row between"><h2>Featured vehicles</h2><a class="btn btn-ghost btn-sm" th:href="@{/vehicles}">Browse all</a></div>
+  <div id="featured" class="grid g4"><div class="state"><div class="spinner"></div>Loading...</div></div>
+</section>
+<section class="section"><div class="grid g3">
+  <div class="card"><h3>Honest pricing</h3><p class="muted">Every quote lists weekend, peak, demand and duration adjustments. The agreed price is locked when you book.</p></div>
+  <div class="card"><h3>No double bookings</h3><p class="muted">Reservations are checked and locked in the database, so two people cannot take the same car for the same days.</p></div>
+  <div class="card"><h3>Explainable matches</h3><p class="muted">Tell us seats, budget and dates; <a th:href="@{/recommend}">see ranked cars</a> with the reasons behind each score.</p></div>
+</div></section>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+<script th:src="@{/js/home.js}" defer></script>
+</body>
+</html>

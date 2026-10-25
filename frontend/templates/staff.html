@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:replace="~{fragments :: head('Operations')}"></head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="container">
+<div id="staff-root">
+  <h1 class="page-title">Operations</h1>
+  <div class="stats"><div class="kpi"><b id="kpi-due">-</b><span>pickups / returns due</span></div><div class="kpi"><b id="kpi-active">-</b><span>vehicles out now</span></div></div>
+  <div class="tabs" role="tablist"><button type="button" data-tab="today">Today</button><button type="button" data-tab="fleet">Fleet &amp; maintenance</button></div>
+  <section class="panel" data-panel="today"><h2>Due today</h2><div id="due"></div><h2>Currently rented</h2><div id="active"></div></section>
+  <section class="panel" data-panel="fleet" hidden><div id="fleet"></div><div id="fleet-pager" class="pager"></div></section>
+</div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+<script th:src="@{/js/staff.js}" defer></script>
+</body>
+</html>

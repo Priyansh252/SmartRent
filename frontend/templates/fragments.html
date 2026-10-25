@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${title} + ' - SmartRent'">SmartRent</title>
+  <link rel="icon" type="image/svg+xml" th:href="@{/images/favicon.svg}">
+  <link rel="stylesheet" th:href="@{/css/smartrent.css}">
+  <script th:src="@{/js/app.js}" defer></script>
+</head>
+<body>
+<header class="site-header" th:fragment="nav">
+  <div class="container row between">
+    <a class="brand" th:href="@{/}">Smart<span>Rent</span></a>
+    <button class="menu-btn" type="button" aria-label="Menu">Menu</button>
+    <nav class="nav" aria-label="Main">
+      <a th:href="@{/vehicles}">Vehicles</a>
+      <a th:href="@{/recommend}">Find my car</a>
+      <a th:href="@{/account}" sec:authorize="hasRole('CUSTOMER')">My bookings</a>
+      <a th:href="@{/staff}" sec:authorize="hasAnyRole('EMPLOYEE','ADMIN')">Operations</a>
+      <a th:href="@{/admin}" sec:authorize="hasRole('ADMIN')">Admin</a>
+      <a th:href="@{/admin/pricing}" sec:authorize="hasRole('ADMIN')">Pricing</a>
+      <a th:href="@{/admin/reports}" sec:authorize="hasRole('ADMIN')">Reports</a>
+      <a th:href="@{/login}" sec:authorize="!isAuthenticated()">Sign in</a>
+      <a class="btn btn-sm" th:href="@{/register}" sec:authorize="!isAuthenticated()">Register</a>
+      <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()" style="display:inline">
+        <button class="linklike" type="submit">Sign out (<span sec:authentication="name">user</span>)</button>
+      </form>
+    </nav>
+  </div>
+</header>
+<footer class="footer" th:fragment="footer">
+  <div class="container row between"><span>SmartRent - CSI3023 Advanced Server-Side Programming project</span><span class="muted small">Demo data only. Prices in INR.</span></div>
+</footer>
+</body>
+</html>

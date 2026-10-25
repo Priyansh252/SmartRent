@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" role="img" aria-label="sedan illustration">
+  <ellipse cx="200" cy="132" rx="168" ry="9" fill="#0F1B2D" opacity=".14"/>
+  <path d="M22 108 L36 92 Q52 84 96 80 L134 54 Q144 48 164 48 L232 48 Q252 48 264 58 L292 80 Q336 82 372 94 L380 108 Z" fill="#1B2B44"/>
+  <path d="M142 58 L166 54 L198 54 L198 80 L118 80 Z M208 54 L232 54 Q242 54 250 61 L270 80 L208 80 Z" fill="#CFE0EE"/>
+  <path d="M40 104 L372 104" stroke="#D9622B" stroke-width="3" stroke-linecap="round"/>
+  
+  <circle cx="112" cy="112" r="22" fill="#0B1220"/><circle cx="112" cy="112" r="10" fill="#8EA2BA"/>
+  <circle cx="298" cy="112" r="22" fill="#0B1220"/><circle cx="298" cy="112" r="10" fill="#8EA2BA"/>
+  <rect x="352" y="96" width="14" height="6" rx="3" fill="#F2C94C"/>
+</svg>

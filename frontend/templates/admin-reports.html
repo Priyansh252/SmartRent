@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:replace="~{fragments :: head('Reports')}"></head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="container">
+<h1 class="page-title">Automated reports</h1>
+<p class="muted">Each report runs as a Spring Batch job reading the live database and writing a CSV file. A scheduled job also runs automatically.</p>
+<form id="report-form" class="card grid g3">
+  <div class="field"><label>Report</label><select name="type"></select></div>
+  <div class="field"><label>From (inclusive)</label><input name="from" type="date" required></div>
+  <div class="field"><label>To (exclusive)</label><input name="to" type="date" required></div>
+  <div style="grid-column:1/-1"><div id="report-msg"></div><button class="btn" type="submit">Generate report</button></div>
+</form>
+<h2>History</h2>
+<div id="history"></div><div id="hist-pager" class="pager"></div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+<script th:src="@{/js/admin-reports.js}" defer></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 150" role="img" aria-label="electric illustration">
+  <ellipse cx="200" cy="132" rx="168" ry="9" fill="#0F1B2D" opacity=".14"/>
+  <path d="M26 108 L40 92 Q54 82 96 80 L132 54 Q142 48 164 48 L240 48 Q258 48 270 58 L298 80 Q342 84 366 96 L372 108 Z" fill="#1B2B44"/>
+  <path d="M140 58 L164 54 L198 54 L198 80 L116 80 Z M208 54 L240 54 Q250 54 258 61 L278 80 L208 80 Z" fill="#CFE0EE"/>
+  <path d="M40 104 L372 104" stroke="#D9622B" stroke-width="3" stroke-linecap="round"/>
+  <path d="M206 92 l-8 14 h7 l-3 12 l12 -17 h-8 l4 -9z" fill="#D9622B"/>
+  <circle cx="112" cy="112" r="22" fill="#0B1220"/><circle cx="112" cy="112" r="10" fill="#8EA2BA"/>
+  <circle cx="298" cy="112" r="22" fill="#0B1220"/><circle cx="298" cy="112" r="10" fill="#8EA2BA"/>
+  <rect x="352" y="96" width="14" height="6" rx="3" fill="#F2C94C"/>
+</svg>

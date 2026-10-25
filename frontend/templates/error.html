@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:replace="~{fragments :: head('Error')}"></head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="container"><div class="state"><h1>Something went wrong</h1>
+<p>The page could not be shown (<span th:text="${status} ?: 'error'">error</span>). <a th:href="@{/}">Back to the home page</a>.</p></div></main>
+<footer th:replace="~{fragments :: footer}"></footer>
+</body>
+</html>

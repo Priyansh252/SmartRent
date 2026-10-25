@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:replace="~{fragments :: head('Vehicles')}"></head>
+<body>
+<header th:replace="~{fragments :: nav}"></header>
+<main class="container">
+<h1 class="page-title">Find a vehicle</h1>
+<div class="layout-2">
+  <form id="filters" class="filters card" autocomplete="off">
+    <div class="field"><label for="f-pick">Pickup date</label><input id="f-pick" type="date" name="pickupDate"></div>
+    <div class="field"><label for="f-ret">Return date</label><input id="f-ret" type="date" name="returnDate"></div>
+    <div class="field"><label for="f-loc">Location</label><select id="f-loc" name="locationId"></select></div>
+    <div class="field"><label for="f-type">Type</label><select id="f-type" name="type"></select></div>
+    <div class="field"><label for="f-seats">Min seats</label><input id="f-seats" type="number" name="minSeats" min="1" max="12"></div>
+    <div class="field"><label for="f-fuel">Fuel</label><select id="f-fuel" name="fuelType"></select></div>
+    <div class="field"><label for="f-tr">Transmission</label><select id="f-tr" name="transmission"></select></div>
+    <div class="field"><label for="f-min">Min price / day</label><input id="f-min" type="number" name="minPrice" min="0"></div>
+    <div class="field"><label for="f-max">Max price / day</label><input id="f-max" type="number" name="maxPrice" min="0"></div>
+    <div class="field"><label for="f-sort">Sort by</label>
+      <select id="f-sort" name="sort"><option value="price">Price</option><option value="seats">Seats</option><option value="year">Model year</option><option value="make">Make</option></select></div>
+    <div class="field"><label for="f-dir">Order</label>
+      <select id="f-dir" name="direction"><option value="asc">Ascending</option><option value="desc">Descending</option></select></div>
+    <button class="btn btn-block" type="submit">Apply filters</button>
+    <button class="btn btn-ghost btn-block" type="button" id="reset">Reset</button>
+  </form>
+  <section>
+    <p id="summary" class="muted" aria-live="polite"></p>
+    <div id="results"></div>
+    <div id="pager" class="pager"></div>
+  </section>
+</div>
+</main>
+<footer th:replace="~{fragments :: footer}"></footer>
+<script th:src="@{/js/vehicles.js}" defer></script>
+</body>
+</html>
