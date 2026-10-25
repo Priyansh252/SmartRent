@@ -1,0 +1,38 @@
+# Local infrastructure for SmartRent: MySQL (persistent data) + ActiveMQ Artemis (JMS broker).
+# Usage:  cp .env.example .env  &&  docker compose up -d
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: smartrent-mysql
+    environment:
+      MYSQL_DATABASE: smartrent
+      MYSQL_USER: ${DB_USERNAME:-smartrent}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?Set MYSQL_ROOT_PASSWORD in .env}
+      TZ: UTC
+    command: ["--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
+    ports:
+      - "3306:3306"
+    volumes:
+      - smartrent_mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  artemis:
+    image: apache/activemq-artemis:2.31.2
+    container_name: smartrent-artemis
+    environment:
+      ARTEMIS_USER: ${ARTEMIS_USER:-artemis}
+      ARTEMIS_PASSWORD: ${ARTEMIS_PASSWORD:?Set ARTEMIS_PASSWORD in .env}
+    ports:
+      - "61616:61616"   # core/JMS acceptor
+      - "8161:8161"     # management console (http://localhost:8161)
+    volumes:
+      - smartrent_artemis_data:/var/lib/artemis-instance
+
+volumes:
+  smartrent_mysql_data:
+  smartrent_artemis_data:
