@@ -1,0 +1,98 @@
+spring:
+  application:
+    name: smartrent
+  # Optional .env support (KEY=value lines) so `mvn spring-boot:run` works without exporting variables.
+  config:
+    import:
+      - "optional:file:./.env[.properties]"
+      - "optional:file:../.env[.properties]"
+
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/smartrent?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:smartrent}
+    password: ${DB_PASSWORD}          # no default on purpose: set it in .env or the environment
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none                  # Flyway owns the schema
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+          batch_size: 50
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  thymeleaf:
+    cache: false
+
+  artemis:
+    mode: native
+    broker-url: ${ARTEMIS_BROKER_URL:tcp://localhost:61616}
+    user: ${ARTEMIS_USER:}
+    password: ${ARTEMIS_PASSWORD:}
+
+  batch:
+    job:
+      enabled: false                  # jobs are launched by ReportService, never on startup
+    jdbc:
+      initialize-schema: never        # batch metadata tables come from Flyway migration V2
+
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+    include-message: never
+    include-binding-errors: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true                 # /actuator/health/liveness and /readiness
+      show-details: never
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+
+smartrent:
+  currency: INR
+  seed:
+    enabled: true
+    admin-password: ${SEED_ADMIN_PASSWORD:Admin@123}
+    employee-password: ${SEED_EMPLOYEE_PASSWORD:Employee@123}
+    customer-password: ${SEED_CUSTOMER_PASSWORD:Customer@123}
+  booking:
+    max-rental-days: 30
+    max-advance-days: 365
+    pickup-days-before-allowed: 0     # 0 = pickup only on/after the booked pickup date
+  jms:
+    events-queue: smartrent.booking.events
+  outbox:
+    poll-interval-ms: 1000
+    batch-size: 50
+    max-attempts: 10
+  reports:
+    output-dir: ${REPORTS_DIR:./reports}
+    scheduler-enabled: true
+    schedule-cron: "0 0 2 * * *"      # daily 02:00 server time
+    lookback-days: 30
+    chunk-size: 50
+  recommendation:
+    max-results: 5
+    weight-price: 0.35
+    weight-capacity: 0.20
+    weight-location: 0.20
+    weight-preference: 0.15
+    weight-availability: 0.10
+    max-location-distance-km: 600
